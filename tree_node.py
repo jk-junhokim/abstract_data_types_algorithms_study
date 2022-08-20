@@ -86,8 +86,8 @@ class BinarySearchTree:
             return None
 
     def _get(self, key, current_node): # root node == current_node. we want the node, not payload
-        if not current_node: # root node doesnt
-            return None
+        if not current_node: # the given node (current_node) is not the root node
+            return None # the search should always start from the root node
         elif current_node.key == key:
             return current_node
         elif key < current_node.key:
