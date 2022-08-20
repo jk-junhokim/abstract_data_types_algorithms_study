@@ -98,3 +98,9 @@ class BinarySearchTree:
     def __getitem__(self, key):
         return self.get(key)
 
+    def __contains__(self, key): # checks is tree contains node (key), but doesn't return payload
+        if self._get(key, self.root):
+            return True
+        else:
+            return False
+
