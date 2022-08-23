@@ -68,7 +68,7 @@ class BinarySearchTree:
                 current_node.left_child = TreeNode(key, val, parent = current_node)
         else:
             if current_node.has_right_child():
-                self._put(key, val, current_node.right_child())
+                self._put(key, val, current_node.right_child)
             else:
                 current_node.right_child = TreeNode(key, val, parent = current_node)
 
@@ -141,6 +141,26 @@ class BinarySearchTree:
                     self.parent.right_child = self.right_child
                 self.right_child.parent = self.parent
 
+    def find_successor(self):
+        succ = None
+        if self.has_right_child():
+            succ = self.right_child.find_min()
+        else:
+            if self.parent:
+                if self.is_left_child():
+                    succ = self.parent
+                else:
+                    self.parent.right_child = None
+                    succ = self.parent.find_successor()
+                    self.parent.right_child = self
+        return succ
+
+    def find_min(self):
+        current = self
+        while current.has_left_child():
+            current = current.left_child
+        return current
+
     def remove(self, current_node):
         if current_node.is_leaf(): # node has no children
             if current_node == current_node.parent.left_child:
@@ -178,7 +198,15 @@ class BinarySearchTree:
                                                   current_node.right_child.left_child,
                                                   current_node.right_child.right_child)
                 
-                
+
+my_tree = BinarySearchTree()
+my_tree[3] = "red"
+my_tree[4] = "blue"
+my_tree[6] = "yellow"
+my_tree[2] = "at"
+
+print(my_tree[6])
+print(my_tree[2])
             
             
 
